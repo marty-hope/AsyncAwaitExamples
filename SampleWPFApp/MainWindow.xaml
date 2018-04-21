@@ -1,0 +1,31 @@
+﻿<Window x:Class="SampleWPFApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SampleWPFApp"
+        mc:Ignorable="d"
+        DataContext="{StaticResource MainViewModel}"
+        Title="Sample" Height="600" Width="800" Background="#FF1D23A0" WindowStyle="ToolWindow" ResizeMode="NoResize">
+    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FocusManager.FocusedElement="{Binding ElementName=txtBoxUserName}">
+        <DockPanel DockPanel.Dock="Left">
+            <Grid HorizontalAlignment="Stretch" Background="#FFE6E2AD" DockPanel.Dock="Top" Height="269.759" Width="496.614">
+                <Label x:Name="lblPassword" Content="Password" HorizontalAlignment="Left" Margin="29.8,0,0,100.718" Width="110.999" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="34.437" VerticalAlignment="Bottom" FontSize="13.333" />
+                <TextBox x:Name="txtBoxUserName" TabIndex="0" Margin="185.943,75.8,59.185,0" TextWrapping="Wrap" Height="34.437" VerticalAlignment="Top" Text="{Binding UserName}" VerticalContentAlignment="Center"/>
+                <Label x:Name="lblUserName" Content="User Name" HorizontalAlignment="Left" Margin="29.8,75.8,0,0" Width="110.999" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="34.437" VerticalAlignment="Top" FontSize="13.333"/>
+                <Button x:Name="btnSubmit" TabIndex="2" Content="Submit" Height="38.71" Margin="185.943,0,56.241,33.814" VerticalAlignment="Bottom" Background="#FF7E99C8" 
+                        IsEnabled="{Binding IsAuthenticated, Converter={StaticResource BooleanConverter}}"
+                        Command="{Binding AuthenticateCommand}"/>
+                <PasswordBox TabIndex="1"  x:Name="pwdPassword" HorizontalAlignment="Left" Margin="185.943,134.604,0,0" VerticalAlignment="Top" Width="254.43" Height="34.437" FontSize="10" PasswordChanged="pwdPassword_PasswordChanged" VerticalContentAlignment="Center"/>
+            </Grid>
+            <Grid DockPanel.Dock="Bottom">
+                <ListBox Margin="0" Background="#FFE2E0CC"/>
+
+            </Grid>
+        </DockPanel>
+        <Grid DockPanel.Dock="Right">
+            <ListBox Margin="0" Background="#FFE2E0CC"/>
+        </Grid>
+    </DockPanel>
+
+</Window>

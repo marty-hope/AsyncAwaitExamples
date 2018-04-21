@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "AsyncAwaitExamples": {
+      "commandName": "Project",
+      "commandLineArgs": "\"This is a line\" \"This is a lines\" \"This is another line\" \"Yet another line\""
+    }
+  }
+}

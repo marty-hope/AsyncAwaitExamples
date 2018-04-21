@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncAwaitExamples", "AsyncAwaitExamples\AsyncAwaitExamples.csproj", "{E7B205CB-D7CE-47AE-B5BF-86FC77A0FE0B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AsyncAwaitExamples", "AsyncAwaitExamples\AsyncAwaitExamples.csproj", "{E7B205CB-D7CE-47AE-B5BF-86FC77A0FE0B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleWPFApp", "SampleWPFApp\SampleWPFApp.csproj", "{A066AB04-7819-41CC-8BCB-0F06BB1F1D51}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{E7B205CB-D7CE-47AE-B5BF-86FC77A0FE0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E7B205CB-D7CE-47AE-B5BF-86FC77A0FE0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E7B205CB-D7CE-47AE-B5BF-86FC77A0FE0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A066AB04-7819-41CC-8BCB-0F06BB1F1D51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A066AB04-7819-41CC-8BCB-0F06BB1F1D51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A066AB04-7819-41CC-8BCB-0F06BB1F1D51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A066AB04-7819-41CC-8BCB-0F06BB1F1D51}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
