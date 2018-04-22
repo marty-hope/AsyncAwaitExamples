@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AsyncAwaitExamples", "Async
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleWPFApp", "SampleWPFApp\SampleWPFApp.csproj", "{A066AB04-7819-41CC-8BCB-0F06BB1F1D51}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{3F934BA9-59C8-4C3A-9FCA-0E8020F123F1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{A066AB04-7819-41CC-8BCB-0F06BB1F1D51}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A066AB04-7819-41CC-8BCB-0F06BB1F1D51}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A066AB04-7819-41CC-8BCB-0F06BB1F1D51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F934BA9-59C8-4C3A-9FCA-0E8020F123F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F934BA9-59C8-4C3A-9FCA-0E8020F123F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F934BA9-59C8-4C3A-9FCA-0E8020F123F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F934BA9-59C8-4C3A-9FCA-0E8020F123F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

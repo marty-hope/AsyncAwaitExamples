@@ -19,5 +19,10 @@ namespace SampleWPFApp.Commands
                 Marshal.ZeroFreeGlobalAllocUnicode(valuePtr);
             }
         }
+
+        internal static double MillisecondsToSeconds(this long millseconds)
+        {
+            return (double)millseconds / (double)1000;
+        }
     }
 }

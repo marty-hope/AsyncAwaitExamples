@@ -65,11 +65,15 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Commands\AsyncExtensions.cs" />
     <Compile Include="Commands\ExtensionMethods.cs" />
     <Compile Include="Commands\InverseBooleanConverter.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Services\AuthenticationService.cs" />
     <Compile Include="Services\IAuthenticationService.cs" />
+    <Compile Include="Services\IPrimeNumberService.cs" />
+    <Compile Include="Services\PrimeNumberCandidate.cs" />
+    <Compile Include="Services\PrimeNumberService.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

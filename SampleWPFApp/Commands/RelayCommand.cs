@@ -5,9 +5,9 @@ namespace SampleWPFApp.Commands
 {
     public class RelayCommand : ICommand
     {
-        private Action<object> execute;
+        private Action<object> _execute;
 
-        private Predicate<object> canExecute;
+        private Predicate<object> _canExecute;
 
         private event EventHandler CanExecuteChangedInternal;
 
@@ -18,18 +18,8 @@ namespace SampleWPFApp.Commands
 
         public RelayCommand(Action<object> execute, Predicate<object> canExecute)
         {
-            if (execute == null)
-            {
-                throw new ArgumentNullException("execute");
-            }
-
-            if (canExecute == null)
-            {
-                throw new ArgumentNullException("canExecute");
-            }
-
-            this.execute = execute;
-            this.canExecute = canExecute;
+            _execute = execute ?? throw new ArgumentNullException(nameof(execute));
+            _canExecute = canExecute ?? throw new ArgumentNullException(nameof(canExecute));
         }
 
         public event EventHandler CanExecuteChanged
@@ -49,28 +39,26 @@ namespace SampleWPFApp.Commands
 
         public bool CanExecute(object parameter)
         {
-            return this.canExecute != null && this.canExecute(parameter);
+            return _canExecute != null && this._canExecute(parameter);
         }
 
         public void Execute(object parameter)
         {
-            this.execute(parameter);
+            this._execute(parameter);
         }
 
         public void OnCanExecuteChanged()
         {
             EventHandler handler = this.CanExecuteChangedInternal;
-            if (handler != null)
-            {
-                //DispatcherHelper.BeginInvokeOnUIThread(() => handler.Invoke(this, EventArgs.Empty));
-                handler.Invoke(this, EventArgs.Empty);
-            }
+
+            //DispatcherHelper.BeginInvokeOnUIThread(() => handler.Invoke(this, EventArgs.Empty));
+            handler?.Invoke(this, EventArgs.Empty);
         }
 
         public void Destroy()
         {
-            this.canExecute = _ => false;
-            this.execute = _ => { return; };
+            _canExecute = _ => false;
+            _execute = _ => { return; };
         }
 
         private static bool DefaultCanExecute(object parameter)
