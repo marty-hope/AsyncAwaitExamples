@@ -10,17 +10,38 @@
     <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FocusManager.FocusedElement="{Binding ElementName=txtBoxUserName}">
         <DockPanel DockPanel.Dock="Left">
             <Grid HorizontalAlignment="Stretch" Background="#FFE6E2AD" DockPanel.Dock="Top" Height="269.759" Width="496.614">
-                <Label x:Name="lblPassword" Content="Password" HorizontalAlignment="Left" Margin="29.8,0,0,100.718" Width="110.999" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="34.437" VerticalAlignment="Bottom" FontSize="13.333" />
-                <TextBox x:Name="txtBoxUserName" TabIndex="0" Margin="185.943,75.8,59.185,0" TextWrapping="Wrap" Height="34.437" VerticalAlignment="Top" Text="{Binding UserName}" VerticalContentAlignment="Center"/>
-                <Label x:Name="lblUserName" Content="User Name" HorizontalAlignment="Left" Margin="29.8,75.8,0,0" Width="110.999" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="34.437" VerticalAlignment="Top" FontSize="13.333"/>
-                <Button x:Name="btnSubmit" TabIndex="2" Content="Submit" Height="38.71" Margin="185.943,0,56.241,33.814" VerticalAlignment="Bottom" Background="#FF7E99C8" 
+                <Label x:Name="lblPassword" Content="Password" HorizontalAlignment="Left" Margin="7.24,0,0,100.718" Width="110.999" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="34.437" VerticalAlignment="Bottom" FontSize="13.333" />
+                <TextBox x:Name="txtBoxUserName" TabIndex="0" Margin="163.383,75.8,124.849,0" TextWrapping="Wrap" Height="34.437" VerticalAlignment="Top" Text="{Binding UserName}" VerticalContentAlignment="Center"/>
+                <Label x:Name="lblUserName" Content="User Name" HorizontalAlignment="Left" Margin="7.24,75.8,0,0" Width="110.999" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="34.437" VerticalAlignment="Top" FontSize="13.333"/>
+                <Button x:Name="btnSubmit" TabIndex="2" Content="Submit" Height="38.71" Margin="163.383,0,122.41,33.814" VerticalAlignment="Bottom" Background="#FF7E99C8" 
                         IsEnabled="{Binding IsAuthenticated, Converter={StaticResource BooleanConverter}}"
                         Command="{Binding AuthenticateCommand}"/>
-                <PasswordBox TabIndex="1"  x:Name="pwdPassword" HorizontalAlignment="Left" Margin="185.943,134.604,0,0" VerticalAlignment="Top" Width="254.43" Height="34.437" FontSize="10" PasswordChanged="pwdPassword_PasswordChanged" VerticalContentAlignment="Center"/>
+                <PasswordBox TabIndex="1"  x:Name="pwdPassword" HorizontalAlignment="Left" Margin="163.383,134.604,0,0" VerticalAlignment="Top" Width="210.821" Height="34.437" FontSize="10" PasswordChanged="pwdPassword_PasswordChanged" VerticalContentAlignment="Center"/>
+                <Button Content="Get Primes" HorizontalAlignment="Left" Margin="411.614,220.995,0,0" 
+                        VerticalAlignment="Top" Width="75" Height="38.764" RenderTransformOrigin="0.301,0.462" 
+                        Background="#FF7E99C8" 
+                        IsEnabled="{Binding IsEnabled}"
+                        Command="{Binding RefreshPrimeNumbersCommand}"/>
             </Grid>
+            <DockPanel DockPanel.Dock="Top" Margin="0" Background="#FFE2E0CC">
+                <TextBlock Text="Integer" TextAlignment="Center" Width="200" DockPanel.Dock="Left"/>
+                <TextBlock Text="Is Prime?"  Width="50" DockPanel.Dock="Left"/>
+                <TextBlock Text="Calculation Time"  Width="200" DockPanel.Dock="Left"/>
+            </DockPanel>
             <Grid DockPanel.Dock="Bottom">
-                <ListBox Margin="0" Background="#FFE2E0CC"/>
-
+                <ListBox Margin="0" Background="#FFE2E0CC" ItemsSource="{Binding Path=PrimeNumberCandidates, Mode=OneTime}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <DockPanel>
+                                <TextBlock Text="{Binding PrimeCandidate}" TextAlignment="Center" DockPanel.Dock="Left" Width="200"/>
+                                <TextBlock Width="10" DockPanel.Dock="Left"/>
+                                <TextBlock Text="{Binding IsPrime}" TextAlignment="Center" DockPanel.Dock="Left" Width="50"/>
+                                <TextBlock Width="10" DockPanel.Dock="Left"/>
+                                <TextBlock Text="{Binding CalculationTime}" TextAlignment="Center" DockPanel.Dock="Left" />
+                            </DockPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </Grid>
         </DockPanel>
         <Grid DockPanel.Dock="Right">

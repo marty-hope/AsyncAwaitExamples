@@ -1,19 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 using SampleWPFApp.Commands;
 
 namespace SampleWPFApp.Services
 {
     public class PrimeNumberService  : IPrimeNumberService
     {
-        public async Task<IEnumerable<PrimeNumberCandidate>>
-            DeterminePrimeCandidates(IEnumerable<int> candidates)
+        public async Task
+            DeterminePrimeCandidates(IList<PrimeNumberCandidate> finalCandidates,
+                IEnumerable<int> candidates)
         {
 
-            var result = new List<PrimeNumberCandidate>();
             var tasks = candidates.Select(async c =>
             {
                 Stopwatch watch = new Stopwatch();
@@ -36,11 +38,15 @@ namespace SampleWPFApp.Services
             });
             foreach (var t in tasks.InCompletionOrder())
             {
-                result.Add(await t);
-                
+                var result = await t;
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    if (!finalCandidates.Contains(result))
+                    {
+                        finalCandidates.Add(result);
+                    }
+                });
             }
-
-            return result;
         }
 
 
@@ -58,7 +64,7 @@ namespace SampleWPFApp.Services
                 case 2:
                     return true;
                 default:
-                    for (int i = 3; i < candidate / 2; i++)
+                    for (int i = 2; i < candidate; i++)
                     {
                         if (candidate % i == 0)
                             return false;

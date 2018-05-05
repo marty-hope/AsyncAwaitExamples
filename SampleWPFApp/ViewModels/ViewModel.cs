@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 using System.Security;
-using System.Threading;
+using System.Security.Cryptography;
+using System.Threading.Tasks;
+using System.Windows.Data;
 using System.Windows.Input;
 using SampleWPFApp.Annotations;
 using SampleWPFApp.Commands;
@@ -13,10 +16,25 @@ namespace SampleWPFApp.ViewModels
 {
     public class ViewModel : INotifyPropertyChanged
     {
-        private IAuthenticationService _authenticationService;
+        private readonly IAuthenticationService _authenticationService;
+        private readonly IPrimeNumberService _primeService;
 
-        public ViewModel() :this(new AuthenticationService())
+        public ViewModel() : this(new AuthenticationService(), new PrimeNumberService())
         {}
+
+        public ViewModel(IAuthenticationService authenticationService, IPrimeNumberService primeService)
+        {
+            _authenticationService = authenticationService;
+            _primeService = primeService;
+            AuthenticateCommand = new RelayCommand(
+                async x =>
+                {
+                    IsAuthenticated = await (_authenticationService.AuthenticateUser(UserName, SecurePassword?.SecureStringToString()));
+                    IsEnabled = IsAuthenticated;
+
+                });
+
+        }
 
         private string _userName;
         public string UserName
@@ -50,23 +68,60 @@ namespace SampleWPFApp.ViewModels
             }
         }
 
-        public ViewModel(IAuthenticationService authenticationService)
+        private bool _isEnabled;
+        public bool IsEnabled
         {
-            _authenticationService = authenticationService;
-            AuthenticateCommand = new RelayCommand(
-                async x =>
+            get => _isEnabled;
+            set
+            {
+                if (_isEnabled != value)
                 {
-                    IsAuthenticated = await (_authenticationService.AuthenticateUser(UserName, SecurePassword?.SecureStringToString()));
-                });
-            //AuthenticateCommand = new RelayCommand(
-            //    x =>
-            //    {
-            //        Thread.Sleep(5000);
-            //        IsAuthenticated = true;
-            //    });
+                    _isEnabled = value;
+                    OnPropertyChanged();
+                }
+            }
         }
 
+        private IList<PrimeNumberCandidate> _candidates = new ObservableCollection<PrimeNumberCandidate>();
+        public IList<PrimeNumberCandidate> PrimeNumberCandidates
+        {
+            get => _candidates;
+            set
+            {
+                if (_candidates.Equals(value))
+                {
+                    _candidates = value;
+                    OnPropertyChanged();
+                }
+            }
+
+        }
+
+     
+
+        
+
         public ICommand AuthenticateCommand { get; set; }
+
+        private ICommand _refreshPrimeNumbersCommand;
+
+        public ICommand RefreshPrimeNumbersCommand
+        {
+            get
+            {
+                if (_refreshPrimeNumbersCommand == null)
+                {
+                    _refreshPrimeNumbersCommand = new RelayCommand(async e =>
+                        {
+                            await DeterminePrimeNumberCandidates();
+                        });
+
+                }
+
+                return _refreshPrimeNumbersCommand;
+
+            }
+        }
 
 
 
@@ -77,5 +132,37 @@ namespace SampleWPFApp.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        private async Task DeterminePrimeNumberCandidates()
+        {
+            PrimeNumberCandidates.Clear();
+            IsEnabled = false;
+            await Task.Run(async () =>
+            {
+                List<int> candidates = new List<int>();
+                var numberOfCandidates = Math.Abs(GetRandomInteger()) % 23;
+                for (int i = 0; i < numberOfCandidates; i++)
+                {
+                    var rnd = GetRandomInteger();
+                    if(!candidates.Contains(rnd)) candidates.Add(rnd);
+                }
+                await _primeService.DeterminePrimeCandidates(PrimeNumberCandidates, candidates);
+
+            });
+            IsEnabled = true;
+        }
+
+        private int GetRandomInteger()
+        {
+
+            using (RNGCryptoServiceProvider rg = new RNGCryptoServiceProvider())
+            {
+                byte[] rno = new byte[5];
+                rg.GetBytes(rno);
+                return Math.Abs(BitConverter.ToInt32(rno, 0));
+            }
+        }
+
+
     }
 }
