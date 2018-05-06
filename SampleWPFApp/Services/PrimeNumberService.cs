@@ -28,7 +28,8 @@ namespace SampleWPFApp.Services
                     {
                         PrimeCandidate = c,
                         IsPrime = isPrime,
-                        CalculationTime = calculationTime
+                        CalculationTime = calculationTime, 
+                        CollectionIndex = candidates.IndexOf(c)
                     };
                 }
                 finally

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security;
 
@@ -24,5 +26,22 @@ namespace SampleWPFApp.Commands
         {
             return (double)millseconds / (double)1000;
         }
+
+        public static int IndexOf<T>(this IEnumerable<T> obj, T value)
+        {
+            return obj.IndexOf(value, null);
+        }
+
+        private static int IndexOf<T>(this IEnumerable<T> obj, T value, IEqualityComparer<T> comparer)
+        {
+            comparer = comparer ?? EqualityComparer<T>.Default;
+            var found = obj
+                .Select((a, i) => new { a, i })
+                .FirstOrDefault(x => comparer.Equals(x.a, value));
+            return found?.i ?? -1;
+        }
+
+
+
     }
 }

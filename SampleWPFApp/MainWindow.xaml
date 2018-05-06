@@ -24,9 +24,10 @@
                         Command="{Binding RefreshPrimeNumbersCommand}"/>
             </Grid>
             <DockPanel DockPanel.Dock="Top" Margin="0" Background="#FFE2E0CC">
-                <TextBlock Text="Integer" TextAlignment="Center" Width="200" DockPanel.Dock="Left"/>
-                <TextBlock Text="Is Prime?"  Width="50" DockPanel.Dock="Left"/>
-                <TextBlock Text="Calculation Time"  Width="200" DockPanel.Dock="Left"/>
+                <TextBlock Text="Integer" TextAlignment="Center" Width="210" DockPanel.Dock="Left"/>
+                <TextBlock Text="Is Prime?"  Width="60" DockPanel.Dock="Left"/>
+                <TextBlock Text="Calculation Time"  Width="110" DockPanel.Dock="Left"/>
+                <TextBlock Text="Original Index"  Width="100" DockPanel.Dock="Left"/>
             </DockPanel>
             <Grid DockPanel.Dock="Bottom">
                 <ListBox Margin="0" Background="#FFE2E0CC" ItemsSource="{Binding Path=PrimeNumberCandidates, Mode=OneTime}">
@@ -35,9 +36,11 @@
                             <DockPanel>
                                 <TextBlock Text="{Binding PrimeCandidate}" TextAlignment="Center" DockPanel.Dock="Left" Width="200"/>
                                 <TextBlock Width="10" DockPanel.Dock="Left"/>
-                                <TextBlock Text="{Binding IsPrime}" TextAlignment="Center" DockPanel.Dock="Left" Width="50"/>
+                                <TextBlock Text="{Binding IsPrime}" TextAlignment="Left" DockPanel.Dock="Left" Width="50"/>
                                 <TextBlock Width="10" DockPanel.Dock="Left"/>
-                                <TextBlock Text="{Binding CalculationTime}" TextAlignment="Center" DockPanel.Dock="Left" />
+                                <TextBlock Text="{Binding CalculationTime}" TextAlignment="Left" DockPanel.Dock="Left" Width="100"/>
+                                <TextBlock Width="10" DockPanel.Dock="Left"/>
+                                <TextBlock Text="{Binding CollectionIndex}" TextAlignment="Center" DockPanel.Dock="Left" />
                             </DockPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
