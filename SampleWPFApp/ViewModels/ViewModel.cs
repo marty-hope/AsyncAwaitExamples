@@ -24,7 +24,7 @@ namespace SampleWPFApp.ViewModels
         public ViewModel() : this(new AuthenticationService(), new PrimeNumberService())
         {
             //This allows the ObservableCollection to work within a threaded context.
-            //Otherwise a dispatcher
+            //Otherwise a dispatcher is required when adding to the collection
             BindingOperations.EnableCollectionSynchronization(PrimeNumberCandidates, LockObject);
         }
 
