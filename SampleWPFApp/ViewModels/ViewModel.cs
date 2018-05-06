@@ -19,8 +19,14 @@ namespace SampleWPFApp.ViewModels
         private readonly IAuthenticationService _authenticationService;
         private readonly IPrimeNumberService _primeService;
 
+        private static object LockObject = new Object();
+
         public ViewModel() : this(new AuthenticationService(), new PrimeNumberService())
-        {}
+        {
+            //This allows the ObservableCollection to work within a threaded context.
+            //Otherwise a dispatcher
+            BindingOperations.EnableCollectionSynchronization(PrimeNumberCandidates, LockObject);
+        }
 
         public ViewModel(IAuthenticationService authenticationService, IPrimeNumberService primeService)
         {

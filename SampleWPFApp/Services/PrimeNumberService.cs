@@ -39,13 +39,10 @@ namespace SampleWPFApp.Services
             foreach (var t in tasks.InCompletionOrder())
             {
                 var result = await t;
-                Application.Current.Dispatcher.Invoke(() =>
+                if (!finalCandidates.Contains(result))
                 {
-                    if (!finalCandidates.Contains(result))
-                    {
-                        finalCandidates.Add(result);
-                    }
-                });
+                    finalCandidates.Add(result);
+                }
             }
         }
 
