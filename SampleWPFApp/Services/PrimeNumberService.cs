@@ -29,7 +29,8 @@ namespace SampleWPFApp.Services
                         PrimeCandidate = c,
                         IsPrime = isPrime,
                         CalculationTime = calculationTime, 
-                        CollectionIndex = candidates.IndexOf(c)
+                        CollectionIndex = candidates.IndexOf(c),
+                        ThreadIndex = System.Threading.Thread.CurrentThread.ManagedThreadId
                     };
                 }
                 finally

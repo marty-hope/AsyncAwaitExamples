@@ -6,5 +6,6 @@
         public bool IsPrime { get; set; }
         public double CalculationTime { get; set; }
         public int CollectionIndex { get; set; }
+        public int ThreadIndex { get; set; }
     }
 }
